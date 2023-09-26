@@ -1,3 +1,4 @@
+<%= render "categories.html", conn: @conn, categories: @categories %>
 <main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
   <div class="flex justify-between px-4 mx-auto max-w-screen-xl">
     <div class="mx-auto w-full">
@@ -27,6 +28,11 @@
               <%= post.content %>
             </p>
           <% end %>
+        <% end %>
+      </div>
+      <div class="flex justify-center mt-6 w-full">
+        <%= if length(@posts) == 0 do %>
+          There are no posts at the moment.
         <% end %>
       </div>
     </div>

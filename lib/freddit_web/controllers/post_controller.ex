@@ -2,7 +2,7 @@ defmodule FredditWeb.PostController do
   use FredditWeb, :controller
   alias Freddit.{Posts, Categories, Posts.Post}
 
-  plug(:load_categories when action in [:index, :new, :create, :edit, :update])
+  plug(:load_categories when action in [:index, :category, :new, :create, :edit, :update])
 
   def action(conn, _) do
     apply(__MODULE__, action_name(conn), [conn, conn.params, conn.assigns.current_user])
@@ -17,6 +17,7 @@ defmodule FredditWeb.PostController do
     page = Posts.list_posts(params)
 
     render(conn, "index.html",
+      page_title: "Latest posts",
       posts: page.entries,
       page_number: page.page_number,
       page_size: page.page_size,
@@ -28,7 +29,7 @@ defmodule FredditWeb.PostController do
   def category(conn, %{"category" => category_id}, _user) do
     {posts, category} = Posts.get_posts_by_category(category_id)
 
-    render(conn, "category.html", posts: posts, category: category)
+    render(conn, "category.html", page_title: category.name, posts: posts, category: category)
   end
 
   def new(conn, _params, _user) do
@@ -44,19 +45,24 @@ defmodule FredditWeb.PostController do
         |> redirect(to: Routes.post_path(conn, :show, post))
 
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", page_title: "Create a post", changeset: changeset)
     end
   end
 
   def show(conn, %{"id" => id}, _user) do
     post = Posts.get_post!(id)
-    render(conn, "show.html", post: post)
+    render(conn, "show.html", page_title: post.title, post: post)
   end
 
   def edit(conn, %{"id" => id}, user) do
     post = Posts.get_post_by_owner(user, id)
     changeset = Posts.change_post(post)
-    render(conn, "edit.html", post: post, changeset: changeset)
+
+    render(conn, "edit.html",
+      page_title: "Edit post: " <> post.tile,
+      post: post,
+      changeset: changeset
+    )
   end
 
   def update(conn, %{"id" => id, "post" => post_params}, user) do
@@ -69,7 +75,11 @@ defmodule FredditWeb.PostController do
         |> redirect(to: Routes.post_path(conn, :show, post))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", post: post, changeset: changeset)
+        render(conn, "edit.html",
+          page_title: "Edit post: " <> post.tile,
+          post: post,
+          changeset: changeset
+        )
     end
   end
 

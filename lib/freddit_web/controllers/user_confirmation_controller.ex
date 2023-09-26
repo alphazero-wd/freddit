@@ -4,7 +4,7 @@ defmodule FredditWeb.UserConfirmationController do
   alias Freddit.Accounts
 
   def new(conn, _params) do
-    render(conn, "new.html")
+    render(conn, "new.html", page_title: "Request email confirmation")
   end
 
   def create(conn, %{"user" => %{"email" => email}}) do
@@ -25,7 +25,7 @@ defmodule FredditWeb.UserConfirmationController do
   end
 
   def edit(conn, %{"token" => token}) do
-    render(conn, "edit.html", token: token)
+    render(conn, "edit.html", page_title: "Resend email confirmation", token: token)
   end
 
   # Do not log in the user after confirmation to avoid a

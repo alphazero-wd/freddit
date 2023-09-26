@@ -5,7 +5,7 @@ defmodule FredditWeb.UserSessionController do
   alias FredditWeb.UserAuth
 
   def new(conn, _params) do
-    render(conn, "new.html", error_message: nil)
+    render(conn, "new.html", page_title: "Log in to your account", error_message: nil)
   end
 
   def create(conn, %{"user" => user_params}) do

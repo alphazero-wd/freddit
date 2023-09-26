@@ -1,10 +1,4 @@
-<div class="overflow-x-auto h-16 flex items-center bg-white shadow-md w-full px-4 mb-4">
-  <div class="container max-w-screen-xl lg:justify-center mx-auto flex gap-x-6">
-    <%= for category <- @categories do %>
-      <%= link elem(category, 0), to: Routes.post_path(@conn, :category, elem(category, 1)), class: "font-medium text-primary-500 hover:text-primary-400" %>
-    <% end %>
-  </div>
-</div>
+<%= render "categories.html", conn: @conn, categories: @categories %>
 <main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
   <div class="flex justify-between px-4 mx-auto max-w-screen-xl">
     <div class="mx-auto w-full">

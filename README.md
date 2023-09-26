@@ -1,19 +1,35 @@
-# Freddit
+# Freddit - A small Reddit clone app built with Phoenix MVC
 
-To start your Phoenix server:
+## Requirements
 
-- Install dependencies with `mix deps.get`
-- Create and migrate your database with `mix ecto.setup`
-- Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+- [Erlang](https://www.erlang.org/downloads.html)
+- [Elixir](https://elixir-lang.org/install.html)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+## How to run the project locally
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+Clone the project
 
-## Learn more
+```bash
+git clone https://github.com/alphazero-wd/freddit.git
+cd freddit
+```
 
-- Official website: https://www.phoenixframework.org/
-- Guides: https://hexdocs.pm/phoenix/overview.html
-- Docs: https://hexdocs.pm/phoenix
-- Forum: https://elixirforum.com/c/phoenix-forum
-- Source: https://github.com/phoenixframework/phoenix
+Install all the dependencies and run Docker compose
+
+```bash
+mix deps.get
+docker-compose up
+```
+
+Start the development server
+
+```bash
+mix phx.server
+```
+
+Run all tests
+
+```bash
+mix test
+```
