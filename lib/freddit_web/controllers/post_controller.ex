@@ -34,7 +34,7 @@ defmodule FredditWeb.PostController do
 
   def new(conn, _params, _user) do
     changeset = Posts.change_post(%Post{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", page_title: "Create a post", changeset: changeset)
   end
 
   def create(conn, %{"post" => post_params}, user) do
@@ -59,7 +59,7 @@ defmodule FredditWeb.PostController do
     changeset = Posts.change_post(post)
 
     render(conn, "edit.html",
-      page_title: "Edit post: " <> post.tile,
+      page_title: "Edit post: " <> post.title,
       post: post,
       changeset: changeset
     )
@@ -76,7 +76,7 @@ defmodule FredditWeb.PostController do
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html",
-          page_title: "Edit post: " <> post.tile,
+          page_title: "Edit post: " <> post.title,
           post: post,
           changeset: changeset
         )

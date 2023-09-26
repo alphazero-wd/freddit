@@ -24,7 +24,7 @@ defmodule FredditWeb.UserRegistrationController do
         |> UserAuth.log_in_user(user)
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", page_title: "Create an account", changeset: changeset)
     end
   end
 end

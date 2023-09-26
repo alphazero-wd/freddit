@@ -30,7 +30,7 @@ defmodule FredditWeb.UserSettingsController do
         |> redirect(to: Routes.user_settings_path(conn, :edit))
 
       {:error, changeset} ->
-        render(conn, "edit.html", email_changeset: changeset)
+        render(conn, "edit.html", page_title: "User Settings", email_changeset: changeset)
     end
   end
 
@@ -46,7 +46,7 @@ defmodule FredditWeb.UserSettingsController do
         |> UserAuth.log_in_user(user)
 
       {:error, changeset} ->
-        render(conn, "edit.html", password_changeset: changeset)
+        render(conn, "edit.html", page_title: "User Settings", password_changeset: changeset)
     end
   end
 
