@@ -36,4 +36,5 @@ jobs:
     - name: Install dependencies
       run: mix deps.get
     - name: Run tests
+      run: docker-compose up
       run: mix test
