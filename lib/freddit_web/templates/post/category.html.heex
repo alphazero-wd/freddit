@@ -1,0 +1,34 @@
+<main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
+  <div class="flex justify-between px-4 mx-auto max-w-screen-xl">
+    <div class="mx-auto w-full">
+      <h1 class="mb-4 text-3xl font-bold tracking-tight"><%= @category.name %></h1>
+      <div class="grid md:grid-cols-2 gap-4 lg:grid-cols-3">
+        <%= for post <- @posts do %>
+          <%= link to: Routes.post_path(@conn, :show, post), class: "card overflow-hidden max-w-full relative gap-y-4 px-6 py-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" do %>
+            <div class="absolute bottom-0 left-0 h-48 w-full z-20 bg-gradient-to-b from-transparent to-white to-100%"></div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center space-x-4">
+                <div class="relative w-8 h-8 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                  <svg class="absolute w-10 h-10 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                    <%= post.creator.username %>
+                  </p>
+                  <time pubdate class="text-sm text-gray-500 truncate dark:text-gray-400">
+                    <%= Calendar.strftime(post.inserted_at, "%B %-d, %Y %I:%M %p") %>
+                  </time>
+                </div>
+              </div>
+            </div>
+            <span class="font-medium mt-3 block text-sm text-primary-600"><%= post.category.name %></span>
+            <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><%= post.title %></h5>
+            <p class="post-content whitespace-pre-wrap h-48 overflow-hidden font-normal text-gray-700 dark:text-gray-400">
+              <%= post.content %>
+            </p>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</main>

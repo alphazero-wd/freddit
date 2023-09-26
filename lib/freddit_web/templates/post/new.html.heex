@@ -1,0 +1,6 @@
+<section class="bg-white dark:bg-gray-900">
+  <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+    <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Create new post</h2>
+    <%= render "form.html", Map.put(assigns, :action, Routes.post_path(@conn, :create)) %>
+  </div>
+</section>
